@@ -1,25 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">  
-  <h2>Create Post</h2>
-  <form action="">
-    <div class="row form-gp">
-      <p>Title</p>
-      <input type="text">
-      <label for="" class="st-label">*</label>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Create New Post</h3>
     </div>
-    <div class="row form-gp">
-      <p>Description</p>
-      <textarea name="" id="" cols="25" rows="5"></textarea>
-      <label for="" class="st-label">*</label>
+    <div class="card-body">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <form action="{{ route('create_post_confirm') }}" method="POST">
+          @csrf
+          <div class="form-group row">
+            <label for="title" class="col-4 col-sm-4 col-md-3">Title</label>
+            <div class="col-7 col-sm-7 col-md-7">
+              <input type="text" id="title" name="title" class="form-control">
+              @error('title')
+                <label class="text-danger">{{ $message }}</label>
+              @enderror
+            </div>
+            <label for="require" class="col-1 col-sm-1 col-md-2 col-form-label text-danger text-md-left">*</label>
+          </div>
+          <div class="form-group row">
+            <label for="desc" class="col-4 col-sm-4 col-md-3">Description</label>
+            <div class="col-7 col-sm-7 col-md-7">
+              <textarea name="desc" id="desc" class="form-control"></textarea>
+              @error('desc')
+                <label class="text-danger">{{ $message }}</label>
+              @enderror
+            </div>
+            <label for="require" class="col-1 col-sm-1 col-md-2 col-form-label text-danger text-md-left">*</label>
+          </div>
+          <div class="form-group">
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary mr-4">Confirm</button>
+              <button type="reset" class="btn btn-light">Clear</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="row form-gp">
-      <input type="button" value="Confirm" class="btn btn-primary ml-4 mx-4">
-      <input type="button" value="Clear" class="btn btn-outline-success">
-    </div>
-  </form>   
-
+  </div>
 </div>
 
 @endsection

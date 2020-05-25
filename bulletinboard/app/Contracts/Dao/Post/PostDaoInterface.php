@@ -2,17 +2,13 @@
 
 namespace App\Contracts\Dao\Post;
 
+use App\Contracts\Dao\Post\PostDaoInterface;
+
 interface PostDaoInterface
 {
-//   //get post list
-//   public function getPostList();
-
-//   //create post
-//   public function createPost(array $data);
-
-//   //delete post
-//   public function deletePost($id);
-
-//   //search post
-//   public function searchPost($searchdata);
+    public function show($request);
+    public function store($post);
+    public function edit($post_id);
+    public function update($user_id, $post);
+    public function destroy($auth_id, $post_id);
 }

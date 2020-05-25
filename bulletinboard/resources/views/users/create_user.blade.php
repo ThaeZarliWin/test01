@@ -1,64 +1,109 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">  
-  <h2>Create User</h2>
-  <form action="">
-    <div class="row form-gp">
-      <p>Name</p>
-      <input type="text">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Email Address</p>
-      <input type="email">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Password</p>
-      <input type="password">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Confirm Password</p>
-      <input type="password">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Type</p>
-      <select>
-        <option selected>-- Choose Type --</option>
-        <option value="1">Admin</option>
-        <option value="2">User</option>
-    </select>
-    <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Phone</p>
-      <input type="text">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Date</p>
-      <input type="date">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Address</p>
-      <textarea name="" id="" cols="25" rows="5"></textarea>
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <p>Profile</p>
-      <input type="file">
-      <label for="" class="st-label">*</label>
-    </div>
-    <div class="row form-gp">
-      <input type="button" value="Confirm" class="btn btn-primary ml-4 mx-4">
-      <input type="button" value="Clear" class="btn btn-outline-success">
-    </div>
-  </form>   
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Create User</h3>
+      </div>
+      <div class="card-body">
+        <div class="col-md-8 mx-auto">
+          <form action="/create_user_confirm" method="post" enctype="multipart/form-data">
+            @csrf
 
+            <div class="form-group row">
+              <label for="name" class="col-4 col-sm-4 col-md-4">Name</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                  <input type="text" id="name" name="name" class="form-control" value="{{ old('name', session('name')) }}">
+                  @error('name')
+                      <label for="validation" class="text-danger">{{ $message }}</label>
+                  @enderror
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-4 col-sm-4 col-md-4">Email</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="text" id="email" name="email" class="form-control" value="{{ old('email', session('email')) }}">
+                @error('email')
+                  <label for="vlaidation" class="text-danger">{{ $message }}</label>
+                @enderror
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-4 col-sm-4 col-md-4">Password</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="password" id="password" name="password" class="form-control" vlaue="{{ old('pwd') }}">
+                @error('password')
+                  <label for="validation" class="text-danger">{{ $message }}</label>
+                @enderror
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group row">
+              <label for="confirm_password" class="col-4 col-sm-4 col-md-4">Confirm Password</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                @error('confirm_password')
+                  <label for="validation" class="text-danger">{{ $message }}</label>
+                @enderror
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group row">
+              <label for="type" class="col-4 col-sm-4 col-md-4">Type</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <select name="type" id="type" class="form-control">
+                  <option value="" disabled selected>-- Choose Authority --</option>
+                  <option value=0 @if (old('type', session('type')) === 0 ) {{"selected"}} @endif>Admin</option>
+                  <option value=1 @if (old('type', session('type')) === 1 ) {{"selected"}} @endif>User</option>
+                </select>
+                @error('type')
+                  <label for="validation" class="text-danger">{{ $message }}</label>
+                @enderror
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group row">
+              <label for="phone" class="col-4 col-sm-4 col-md-4">Phone</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone', session('phone')) }}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="dob" class="col-4 col-sm-4 col-md-4">Date of Birth</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob', session('dob')) }}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="address" class="col-4 col-sm-4 col-md-4">Address</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <textarea name="address" id="address" class="form-control">{{ old('address', session('address')) }}</textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="profile" class="col-4 col-sm-4 col-md-4">Profile</label>
+              <div class="col-7 col-sm-7 col-md-7">
+                <input type="file" id="profile" name="profileImg" value="{{ old('profile') }}" class="form-control" onchange="readURL(this);">
+                @error('profileImg')
+                  <label for="validation" class="text-danger">{{ $message }}</label>
+                @enderror
+                <img src="http://placehold.it/180" id="img-display" class="mt-3 profile border border-info" alt="profile" width="180px" height="180px">
+              </div>
+              <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
+            </div>
+            <div class="form-group">
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary  mr-4">Confirm</button>
+                <button type="reset" class="btn btn-light">Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 </div>
 
 @endsection
