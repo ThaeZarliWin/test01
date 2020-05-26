@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->type == '0')
 <div class="container">
   <h2>User List</h2>
 
@@ -23,7 +24,7 @@
         <div class="col-lg-4">
           <div class="form-group text-center" style ="display : flex;">
             <button type="submit" class="btn btn-primary btn-md mb-4">Search</button>
-            <a href="/create_user" class="btn btn-primary btn-md mb-4 ml-4">Add</a>
+            <a href="{{ route('create_user')}}" class="btn btn-primary btn-md mb-4 ml-4">Add</a>
           </div>
         </div>
       </div>
@@ -75,6 +76,9 @@
     </form>
   </div>
 </div>
+@else
+  <p class="text-center">This page is allowed only Adminstrator..</p>
+@endif
 @foreach($users as $user)
 <div class="modal fade" id="delete_{{ $user->id }}" role="dialog">
   <div class="modal-dialog">

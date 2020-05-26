@@ -21,3 +21,15 @@ function deletePost(id)
     $(".deleteForm").attr('action', url);
     $(".postID").attr('value', id);
 }
+
+// Footer
+$(window).on('load resize', function () {
+    $win = window.innerHeight;
+    $height = document.getElementById('app').clientHeight;
+    if ($height < $win) {
+        $('.footer').css('width','100%');
+        $('.footer').css('bottom','0');
+        $('.footer').css('position','absolute');
+    }
+});
+// End footer

@@ -97,7 +97,7 @@
         </div>
         <div class="row">
           <label class="col-4">Status</label>
-          <label class="col-8">{{ $post->status }}</label>
+          <label class="col-8">@if( $post->status ==1 ) Active @else Inactive @endif</label>
         </div>
         <div class="row">
           <label class="col-4">Created At</label>

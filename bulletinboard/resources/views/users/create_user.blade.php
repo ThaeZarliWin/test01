@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->type == '0')
 <div class="container">
     <div class="card">
       <div class="card-header">
@@ -10,13 +11,12 @@
         <div class="col-md-8 mx-auto">
           <form action="/create_user_confirm" method="post" enctype="multipart/form-data">
             @csrf
-
             <div class="form-group row">
               <label for="name" class="col-4 col-sm-4 col-md-4">Name</label>
               <div class="col-7 col-sm-7 col-md-7">
                   <input type="text" id="name" name="name" class="form-control" value="{{ old('name', session('name')) }}">
                   @error('name')
-                      <label for="validation" class="text-danger">{{ $message }}</label>
+                    <label for="validation" class="text-danger">{{ $message }}</label>
                   @enderror
               </div>
               <label for="require" class="col-1 col-sm-1 col-md-1 col-form-label text-danger text-md-left">*</label>
@@ -105,5 +105,8 @@
       </div>
     </div>
 </div>
+@else
+  <p class="text-center">This page is allowed only Adminstrator..</p>
+@endif
 
 @endsection

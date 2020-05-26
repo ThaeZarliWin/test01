@@ -33,6 +33,14 @@ class UserController extends Controller
 
     public function create()
     {
+        // session()->forget([
+        //     'name',
+        //     'email',
+        //     'type',
+        //     'phone',
+        //     'dob',
+        //     'address',
+        // ]);
         return view('users.create_user');
     }
 
@@ -94,13 +102,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // return response($id);
         $user = User::find($id);
         $user->deleted_user_id = Auth::user()->id;
         $user->save();
         $del = $this->userService->destroy($id);
         return redirect()->back();
-        // return response($user->deleted_user_id);
     }
 
     /**
@@ -113,7 +119,6 @@ class UserController extends Controller
     {
 
         $users = $this->userService->edit($user_id);
-        // return response($users);
         return view('users.update_user', compact('users'));
     }
     /**
@@ -162,7 +167,6 @@ class UserController extends Controller
     {
         $validator = $request->validated();
         $status = $this->userService->changepassword($request, $user_id);
-        // return response($user_id);
         return redirect()->intended('user_list');
     }
 }

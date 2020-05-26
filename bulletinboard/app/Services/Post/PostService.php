@@ -90,6 +90,9 @@ class PostService implements PostServiceInterface
         $post->title = $request->title;
         $post->desc = $request->desc;
         $post->status = $request->status;
+        if (is_null($post->status)) {
+            $post->status = '0';
+        }
         return $post;
     }
     /**
@@ -106,11 +109,6 @@ class PostService implements PostServiceInterface
         $post->title  =  $request->title;
         $post->desc   =  $request->desc;
         $post->status =  $request->status;
-        if (!$request->status) {
-            $post->status = '0';
-        } else {
-            $post->status = '1';
-        }
         return $this->postDao->update($user_id = Auth::user()->id, $post);
     }
      /**

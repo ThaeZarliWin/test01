@@ -57,7 +57,7 @@ class UserService implements UserServiceInterface
         $user->dob = $request->dob;
         $user->address = $request->address;
 
-        session()->forget([
+        session([
             'name' => $request->name,
             'email' => $request->email,
             'type' => $request->type,

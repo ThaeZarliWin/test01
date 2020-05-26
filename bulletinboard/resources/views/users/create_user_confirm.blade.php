@@ -54,7 +54,7 @@
               <div class="form-group row">
                 <div class="ml-4">
                   <button type="submit" class="btn btn-primary  mr-4">Create</button>
-                  <a href="/create_user" class="btn btn-light">Cancel</a>
+                  <a href="{{ route('create_user')}}" class="btn btn-light">Cancel</a>
                 </div>
               </div>
             </div>

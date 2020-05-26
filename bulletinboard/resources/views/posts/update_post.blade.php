@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('script')
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+@endsection
+@section('style')
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+@endsection
 
 @section('content')
 
@@ -35,13 +41,9 @@
           <div class="form-group row">
             <label for="status" class="col-3 col-sm-3 col-md-4">Status</label>
             <div class="col-8 col-sm-8 col-md-6 custom-control custom-switch">
-            @if($post_detail->status)
-              <input type="checkbox" class="custom-control-input" id="customSwitches" name="status" checked>
+              <input type="checkbox" data-toggle="toggle" data-on="active" data-off="inactive" data-style="round" data-onstyle="success" data-offstyle="danger" name="status" id="customSwitches" data-toggle="toggle" data-onstyle="success" class="custom-control-input ml-2" value="1"
+              @if(old('status', $post_detail->status)=='1' ) {{"checked"}} @endif>
               <label class="custom-control-label" for="customSwitches"></label>
-            @else
-              <input type="checkbox" class="custom-control-input" id="customSwitches" name="status">
-              <label class="custom-control-label" for="customSwitches"></label>
-            @endif
             </div>
           </div>
           <div class="form-group">

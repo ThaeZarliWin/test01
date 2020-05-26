@@ -10,7 +10,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\CSVFileRequest;
-use Auth;
 use App\Imports\CSVFiles;
 use App\Exports\DownloadPost;
 
@@ -25,7 +24,7 @@ class PostController extends Controller
      */
     public function __construct(PostServiceInterface $postService)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth' ,['except' => ['show','export']]);
         $this->postService = $postService;
     }
 
@@ -110,8 +109,7 @@ class PostController extends Controller
     public function update(Request $request, $post_id)
     {
         $posts = $this->postService->update($request, $post_id);
-        return redirect()->intended('post_list')
-            ->withSuccess('Post update successfully.');
+        return redirect()->intended('post_list')->withSuccess('Post update successfully.');
     }
     /**
      * Delete Post
