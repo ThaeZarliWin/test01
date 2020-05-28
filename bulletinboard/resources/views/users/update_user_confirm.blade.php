@@ -1,43 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- <div class="container">  
-  <h2>Update User Confirmation</h2>
-  <form action="" class="bullet-user">
-    <div class="row form-gp">
-      <label for="name" class="text-label">{{ __('Name') }}</label>
-      <label for="name" class="text-md-left">User 1</label>
-    </div>
-    <div class="row form-gp">
-      <label for="email" class="text-label">{{ __('Email Address') }}</label>
-      <label for="email" class="text-md-left"><a href="#">user1@gmail.com</a></label>
-    </div>
-    <div class="row form-gp">
-      <label for="password" class="text-label">{{ __('Password') }}</label>
-      <label for="type" class="text-md-left">Admin</label>
-    </div>
-    <div class="row form-gp">
-      <label for="phone" class="text-label">{{ __('Phone') }}</label>
-      <label for="phone" class="text-md-left">97845123</label>
-    </div>
-    <div class="row form-gp">
-      <label for="dob" class="text-label">{{ __('Date Of Birth') }}</label>
-      <label for="dob" class="text-md-left">2004/10/05</label>
-    </div>
-    <div class="row form-gp">
-      <label for="address" class="text-label">{{ __('Address') }}</label>
-      <label for="address" class="text-md-left">Yangon</label>
-    </div>
-    <div class="profile-img">
-      <img id="output" src="./img/default.png" alt="default" />
-    </div>
-    <div class="row form-gp">
-      <input type="button" value="Update" class="btn btn-primary ml-4 mx-4">
-      <input type="button" value="Clear" class="btn btn-outline-success">
-    </div>
-  </form>   
-
-</div> -->
 <div class="container">
   <div class="card">
     <div class="card-header">
@@ -92,7 +55,7 @@
             </div>
             <div class="col-12 col-sm-4 col-md-4">
               <input type="hidden" id="profile" name="filename" value="{{ $user->filename }}" class="form-control" onchange="readURL(this);">
-              <img src="/img/tempProfile/{{ $user->filename }} " class="profile border border-info rounded-circle" alt="profile">
+              <img src="/img/tempProfile/{{ $user->filename }} " class="profile border border-info rounded-circle" alt="profile" width="100px" heigth="100px">
             </div>
           </div>
         </form>

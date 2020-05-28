@@ -22,6 +22,7 @@ interface UserServiceInterface
 
     public function store($request);
     public function destroy($id);
+    public function createConfirm($request);
     public function edit($auth_id);
     public function editConfirm($request);
     public function update($request);

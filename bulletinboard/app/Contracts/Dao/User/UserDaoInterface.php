@@ -2,8 +2,6 @@
 
 namespace App\Contracts\Dao\User;
 
-use App\Contracts\Dao\User\UserDaoInterface;
-
 interface UserDaoInterface
 {
     /**

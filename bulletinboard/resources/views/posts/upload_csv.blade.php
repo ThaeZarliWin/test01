@@ -15,11 +15,19 @@
                 <div class="col-sm-10 border">
                   <div class="form-group row mt-5 ml-auto">
                     <input type="file" name="import_file" class="col-md-6 col-sm-10">
-                    @if ($errors->any())
+                    @error('import_file')
+                      <label for="validation" class="text-danger">{{ $message }}</label>
+                    @enderror
+                    <!-- @if ($errors->any())
                     <div class="text-danger">
                       @foreach($errors->all() as $error)
                         <small>{{ $error }}</small>
                       @endforeach
+                    </div>
+                    @endif -->
+                    @if(Session::has('duplicate'))
+                    <div class="alert alert-danger">
+                      {{ Session::get('duplicate')}}
                     </div>
                     @endif
                   </div>

@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function __construct(PostServiceInterface $postService)
     {
-        $this->middleware('auth' ,['except' => ['show','export']]);
+        $this->middleware('auth', ['except' => ['show', 'export']]);
         $this->postService = $postService;
     }
 
@@ -33,7 +33,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('posts.create_post');
     }
 
@@ -50,7 +51,7 @@ class PostController extends Controller
         return view('posts.create_post_confirm', compact('post'));
     }
 
-     /**
+    /**
      * Store Post Detail
      *
      * @param Request $request
@@ -58,6 +59,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        session()->forget([
+            'title',
+            'desc'
+        ]);
         $posts = $this->postService->store($request);
         return redirect()->intended('post_list')
             ->withSuccess('Post create successfully.');
@@ -70,12 +75,13 @@ class PostController extends Controller
      * @return void
      */
 
-    public function show(Request $request) {
+    public function show(Request $request)
+    {
         $posts = $this->postService->show($request);
         return view('posts.post_list', compact('posts'));
     }
 
-     /**
+    /**
      * Show the form for update post
      *
      * @param $post_id
@@ -97,7 +103,7 @@ class PostController extends Controller
     {
         $validator = $request->validated($post_id);
         $post = $this->postService->editConfirm($request);
-        return view('posts.update_post_confirm', compact('post','post_id'));
+        return view('posts.update_post_confirm', compact('post', 'post_id'));
     }
     /**
      * Update Post in database.
@@ -117,19 +123,19 @@ class PostController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $post_id) 
+    public function destroy(Request $request, $post_id)
     {
-        $posts = $this->postService->destroy( $request, $post_id = $request->post_id);
+        $posts = $this->postService->destroy($request, $post_id = $request->post_id);
         return redirect()->intended('post_list')
             ->withSuccess('Post delete successfully.');
     }
     /**
-    * upload post
-    * @return void
-    */
+     * upload post
+     * @return void
+     */
     public function uploadView()
     {
-       return view('posts.upload_csv');
+        return view('posts.upload_csv');
     }
     /**
      * Upload File Function
@@ -140,7 +146,8 @@ class PostController extends Controller
     public function uploadFile(CSVFileRequest $request)
     {
         $validator = $request->validated();
-        Excel::import(new CSVFiles , request() -> file ('import_file'));
+        $files = $request->file('import_file');
+        Excel::import(new CSVFiles, $files);
         return redirect('post_list');
     }
     /**
@@ -149,8 +156,8 @@ class PostController extends Controller
      * @param Request $request
      * @return void
      */
-    public function download(Request $request) 
+    public function download(Request $request)
     {
-        return Excel::download(new DownloadPost , 'post.xlsx');
+        return Excel::download(new DownloadPost, 'post.xlsx');
     }
 }

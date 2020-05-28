@@ -13,6 +13,9 @@ interface PostServiceInterface
     public function show($request);
 
     public function edit($post_id);
+    public function editConfirm($request);
+    public function createConfirm($request);
+    public function store($request);
     public function update($request, $post_id);
     public function destroy($auth_id, $post_id);
 }

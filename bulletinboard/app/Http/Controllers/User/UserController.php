@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\PasswordChangeRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -33,14 +33,6 @@ class UserController extends Controller
 
     public function create()
     {
-        // session()->forget([
-        //     'name',
-        //     'email',
-        //     'type',
-        //     'phone',
-        //     'dob',
-        //     'address',
-        // ]);
         return view('users.create_user');
     }
 
@@ -65,12 +57,6 @@ class UserController extends Controller
      */
     public function show(Request $request) 
     {
-        session()->forget([
-            'name',
-            'email',
-            'created_from',
-            'created_to'
-        ]);
         $search = new User;
         $search->name = $request->name;
         $search->email = $request->email;
@@ -91,6 +77,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
+        session()->forget([
+            'name',
+            'email',
+            'dob',
+            'phone',
+            'address',
+            'created_from',
+            'created_to'
+        ]);
         $insert_user = $this->userService->store($request);
         return redirect()->intended('user_list')->with('success', 'User create successfully.');
     }

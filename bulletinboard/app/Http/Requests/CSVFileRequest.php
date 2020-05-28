@@ -24,7 +24,7 @@ class CSVFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'import_file' => 'required|file|max:2048|mimes:csv,txt',
+            'import_file' => 'required|file|max:2048|mimes:csv,txt,xlsx|unique:posts,title',
         ];
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Contracts\Dao\Post;
 
-use App\Contracts\Dao\Post\PostDaoInterface;
-
 interface PostDaoInterface
 {
     public function show($request);

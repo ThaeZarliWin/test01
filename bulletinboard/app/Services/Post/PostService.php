@@ -5,7 +5,7 @@ namespace App\Services\Post;
 use App\Models\Post;
 use App\Contracts\Dao\Post\PostDaoInterface;
 use App\Contracts\Services\Post\PostServiceInterface;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PostService implements PostServiceInterface
 {

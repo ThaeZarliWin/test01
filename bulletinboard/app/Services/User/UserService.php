@@ -4,9 +4,9 @@ namespace App\Services\User;
 
 use App\Contracts\Dao\User\UserDaoInterface;
 use App\Contracts\Services\User\UserServiceInterface;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserService implements UserServiceInterface
 {
