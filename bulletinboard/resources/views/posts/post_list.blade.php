@@ -20,7 +20,7 @@
               <a href="/upload" class="form-group btn btn-primary btn-md mb-4 ml-4">Upload</a>
               @endauth
               @guest
-              
+
               @endguest
               <a href="/export" class="form-group btn btn-primary btn-md mb-4 ml-4">Download</a>
             </div>
@@ -31,7 +31,7 @@
 
     <!-- Table -->
     <table class="table table-striped table-responsive-sm">
-      <thead> 
+      <thead>
         <tr>
           <th scope="col">Post Title</th>
           <th scope="col">Post Description</th>
@@ -43,32 +43,32 @@
         </tr>
       </thead>
       <tbody>
-      @if($posts -> count())
+        @if($posts -> count())
         @foreach($posts as $post)
-          <tr>
-            <td>
-              <a href="#" data-toggle="modal" data-target="#show_{{ $post->id }}">{{ $post->title }}</a>
-            </td>
-            <td>{{ $post->description }}</td>
-            @if($post ->users)
-                <td>{{ $post->users->name }}</td>
-                @else
-                <td>-</td>
-                @endif
-            <td>{{ $post->created_at->format('Y-m-d') }}</td>
-            @auth
-            <td>
-              <a class="btn btn-primary" href="/update_post/{{ $post->id }}">Edit</a>
-            </td>
-            <td>
-              <a class="btn btn-danger" title="Delete" href="#"data-toggle="modal" data-target="#deleteConfirmModal"onclick="deletePost({{$post->id}})">Delete</a>
-            </td>
-            @endauth
-            @guest
-            @endguest
-          </tr>
+        <tr>
+          <td>
+            <a href="#" data-toggle="modal" data-target="#show_{{ $post->id }}">{{ $post->title }}</a>
+          </td>
+          <td>{{ $post->description }}</td>
+          @if($post ->users)
+          <td>{{ $post->users->name }}</td>
+          @else
+          <td>-</td>
+          @endif
+          <td>{{ $post->created_at->format('Y-m-d') }}</td>
+          @auth
+          <td>
+            <a class="btn btn-primary" href="/update_post/{{ $post->id }}">Edit</a>
+          </td>
+          <td>
+            <a class="btn btn-danger" title="Delete" href="#" data-toggle="modal" data-target="#deleteConfirmModal" onclick="deletePost({{$post->id}})">Delete</a>
+          </td>
+          @endauth
+          @guest
+          @endguest
+        </tr>
         @endforeach
-      @endif
+        @endif
       </tbody>
     </table>
     <div class="pagination col-11 justify-content-center">
@@ -80,7 +80,7 @@
 @foreach($posts as $post)
 <!-- Post Detail Modal -->
 <div class="modal fade" id="show_{{ $post->id }}" role="dialog">
-  <div class="modal-dialog" role="document" >
+  <div class="modal-dialog" role="document">
     <div class="card modal-content">
       <div class="card-header modal-header">
         <h3 class="modal-name" id="post-title"></h3>
@@ -107,7 +107,7 @@
         <div class="row">
           <label class="col-4">Created User</label>
           <label class="col-8">{{ $post->users->name }}</label>
-        </div>    
+        </div>
         @endif
         <div class="row">
           <label class="col-4">Last Updated At</label>
@@ -117,7 +117,7 @@
         <div class="row">
           <label class="col-4">Updated User</label>
           <label class="col-8">{{ $post->updatedUsers->name }}</label>
-        </div>    
+        </div>
         @endif
       </div>
       <div class="modal-footer">

@@ -57,6 +57,16 @@ class UserController extends Controller
      */
     public function show(Request $request) 
     {
+        session()->forget([
+            'name',
+            'email',
+            'dob',
+            'type',
+            'phone',
+            'address',
+            'created_from',
+            'created_to'
+        ]);
         $search = new User;
         $search->name = $request->name;
         $search->email = $request->email;
@@ -77,16 +87,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-        session()->forget([
-            'name',
-            'email',
-            'dob',
-            'phone',
-            'address',
-            'created_from',
-            'created_to'
-        ]);
         $insert_user = $this->userService->store($request);
         return redirect()->intended('user_list')->with('success', 'User create successfully.');
     }

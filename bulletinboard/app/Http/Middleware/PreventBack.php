@@ -15,7 +15,7 @@ class PreventBack
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $responsive = $next($request);
         return $responsive->header('Cache-Control', 'nocache, no-store, max-age=0, max-revalidate')
             ->header('Pragma','no-cache')
             ->header('Expire', 'Sat,01 Jan 1990 00:00:00 GMT');

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Post\PostController@show');
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
+
 
 Auth::routes();
-
 Route::group(['middleware' => ['preventback','auth']], function(){
+    
     Route::get('/create_post','Post\PostController@create')->name('create_post');
     Route::post('/storePost', 'Post\PostController@store')->name('storePost');
     Route::any('/post_list','Post\PostController@show')->name('post_list');
